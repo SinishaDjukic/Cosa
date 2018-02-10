@@ -107,7 +107,8 @@ env.Append(
 env.Replace(
 	CFLAGS=[
   #"-Wall", "-Wextra", 
-		"-std=gnu11", "-c", "-g", "-Os", "-ffunction-sections", "-fdata-sections", "-MMD", "-flto"
+		#20180210: lto disabled as sometimes it leads to undefined references with AVR 4.9.2
+		"-std=gnu11", "-c", "-g", "-Os", "-ffunction-sections", "-fdata-sections", "-MMD", "-fno-lto"
 	]
 )
 
@@ -131,7 +132,8 @@ env.Replace(
 env.Replace(
 	CPPFLAGS=[
   #"-Wall", "-Wextra", 
-        "-c", "-g", "-Os", "-fno-exceptions", "-ffunction-sections", "-fdata-sections", "-MMD", "-Woverloaded-virtual", "-flto", "-std=gnu++11", "-felide-constructors", "-fno-implement-inlines", "-fno-rtti", "-fno-threadsafe-statics", "-mcall-prologues"
+		#20180210: lto disabled as sometimes it leads to undefined references with AVR 4.9.2
+        "-c", "-g", "-Os", "-fno-exceptions", "-ffunction-sections", "-fdata-sections", "-MMD", "-Woverloaded-virtual", "-fno-lto", "-std=gnu++11", "-felide-constructors", "-fno-implement-inlines", "-fno-rtti", "-fno-threadsafe-statics", "-mcall-prologues"
 	]
 )
 

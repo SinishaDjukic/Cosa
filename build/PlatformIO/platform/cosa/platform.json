@@ -2,18 +2,22 @@
   "name": "cosa",
   "title": "Cosa ",
   "description": "Cosa Framework",
-  "url": "TODO",
-  "homepage": "TODO",
-  "license": "TODO",
+  "url": "https://github.com/MikaelPatel/Cosa",
+  "homepage": "https://github.com/MikaelPatel/Cosa",
+  "license": "LGPL-2.1",
   "engines": {
-    "platformio": "^3.0.0",
-    "scons": ">=2.3.0,<2.6.0"
+    "platformio": "^3.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "TODO"
+    "url": "https://github.com/mikaelpatel/Cosa.git"
   },
-  "version": "1.0.0",
+  "version": "1.2.100",
+  "packageRepositories": [
+    "https://dl.bintray.com/platformio/dl-packages/manifest.json",
+    "http://dl.platformio.org/packages/manifest.json",
+    "https://raw.githubusercontent.com/eerimoq/simba/master/make/platformio/manifest.json"
+  ],
   "frameworks": {
     "cosa": {
       "package": "framework-cosa",
@@ -28,7 +32,7 @@
     "framework-cosa": {
       "type": "framework",
       "optional": true,
-      "version": ">=1.0.0"
+      "version": ">=1.2.100"
     },
     "tool-avrdude": {
       "type": "uploader",
