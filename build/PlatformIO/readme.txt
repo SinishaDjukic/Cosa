@@ -1,23 +1,44 @@
-Configuration
+Installation
 =============
-Some symlinks need to be created in the PlatformIO's home folder residing "<home dir>./platformio" as follows:
-    ./platformio/platforms/cosa -> <Cosa project root>/build/PlatformIO/platform/cosa
-    ./platformio/packages/framework-cosa -> <Cosa project root>
+Until Cosa is published as a standard PlatformIO framework the following instructions apply for local installations:
 
-A special CosaBuild project for PlatformIO is used to rebuild Cosa under this build system. The project configuration file is "build/PlatformIO/CosaBuild/platformio.ini" contains a separate section for each build to be built against. All sections must have the following values set:
-    platform = cosa
-    framework = cosa
+1) Copy the Cosa project root to the Platformio "packages" folder and rename as "framework-cosa":
+    <Cosa project root> -> ~/./platformio/packages/framework-cosa
 
-Board configurations reside in "<Cosa project root>/build/PlatformIO/platform/cosa/boards" and only a few have been added so far" (TODO).
+2) Copy the "cosa.py" build script to the "atmelavr" framework build scripts:
+    <Cosa project root>/build/PlatformIO/platform/cosa/builder/frameworks/cosa.py
+      -> ~/./platformio/platforms/atmelavr/builder/frameworks/cosa.py
 
-Build
-=====
-Enter "<Cosa project root>/build/PlatformIO/CosaBuild" and run
+3) Add Cosa to the list of supported frameworks in "atmelavr". Edit:
+   ~/./platformio/platforms/atmelavr/platform.json
+   
+   Add this section to "frameworks":
+   "cosa": {
+      "package": "framework-cosa",
+      "script": "builder/frameworks/cosa.py"
+    }
+    
+    Add this section to "packages":
+    "framework-cosa": {
+      "type": "framework",
+      "optional": true,
+      "version": ">=1.2.100"
+    }
+    
+4) Board definitions should be edited to support the Cosa framework. E.g. ~/./platformio/platforms/atmelavr/boards/uno.json should be updated as follows:
+  "frameworks": [
+    "arduino",
+    "simba",
+	"cosa"
+  ]
+
+
+Project Configuration
+=====================
+Projects using Cosa use the framework value "cosa" in platformio.ini:
+	platform = atmelavr
+	framework = cosa
+
+To test it out you can use the sample build project "<Cosa project root>/build/PlatformIO/CosaBuild" and run
     platformio run
 
-
-Support
-=======
-The build system has so far been tested only on Windows, so some glitches may be expected on Linux, althouth it is supposed to be cross-platform.
-
-Currently, the build script "<Cosa project root>/build/PlatformIO/platform/cosa/builder/frameworks/cosa.py" prints some debug info about the library folders detected and added to the build path (lines 76-77), and this should be disabled in the future after more cross-platform testing.
