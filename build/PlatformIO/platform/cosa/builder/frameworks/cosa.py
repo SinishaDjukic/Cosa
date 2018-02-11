@@ -55,6 +55,7 @@ PLATFORMFW_LIBRARIES_DIR = join(PLATFORMFW_DIR, "libraries")
 lib_dirs.append(PLATFORMFW_LIBRARIES_DIR)
 lib_dirs.append(join(PLATFORMFW_DIR, "cores", BOARD_CORELIBDIRNAME))
 lib_dirs.append(join(PLATFORMFW_DIR, "variants", BOARD_VARIANTLIBDIRNAME))
+lib_dirs.append(join(PLATFORMFW_DIR, "build", "PlatformIO"))
 
 for _, subdirs, _ in walk(PLATFORMFW_LIBRARIES_DIR):
 #  print "Adding Cosa libraries:"
@@ -108,7 +109,7 @@ env.Replace(
 	CFLAGS=[
   #"-Wall", "-Wextra", 
 		#20180210: lto disabled as sometimes it leads to undefined references with AVR 4.9.2
-		"-std=gnu11", "-c", "-g", "-Os", "-ffunction-sections", "-fdata-sections", "-MMD", "-fno-lto"
+		"-std=gnu11", "-c", "-g", "-Os", "-ffunction-sections", "-fdata-sections", "-MMD", "-fno-lto", "-Wno-deprecated"
 	]
 )
 
@@ -122,7 +123,8 @@ env.Replace(
         #"-Wall",  # show warnings
         "-ffunction-sections",  # place each function in its own section
         "-fdata-sections",
-        "-mmcu=$BOARD_MCU"
+        "-mmcu=$BOARD_MCU",
+"-Wno-deprecated"
 	]
 )
 
@@ -133,7 +135,7 @@ env.Replace(
 	CPPFLAGS=[
   #"-Wall", "-Wextra", 
 		#20180210: lto disabled as sometimes it leads to undefined references with AVR 4.9.2
-        "-c", "-g", "-Os", "-fno-exceptions", "-ffunction-sections", "-fdata-sections", "-MMD", "-Woverloaded-virtual", "-fno-lto", "-std=gnu++11", "-felide-constructors", "-fno-implement-inlines", "-fno-rtti", "-fno-threadsafe-statics", "-mcall-prologues"
+        "-c", "-g", "-Os", "-fno-exceptions", "-ffunction-sections", "-fdata-sections", "-MMD", "-Woverloaded-virtual", "-fno-lto", "-std=gnu++11", "-felide-constructors", "-fno-implement-inlines", "-fno-rtti", "-fno-threadsafe-statics", "-mcall-prologues", "-Wno-deprecated"
 	]
 )
 
