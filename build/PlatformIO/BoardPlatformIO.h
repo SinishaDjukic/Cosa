@@ -13,6 +13,8 @@
 #define ARDUINO_MICRO
 #elif defined(ARDUINO_AVR_NANO)
 #define ARDUINO_NANO
+#elif defined(ARDUINO_AVR_PRO)
+#define ARDUINO_PRO_MINI
 #elif defined(ARDUINO_AVR_PROMICRO8)
 #define ARDUINO_PRO_MICRO
 #elif defined(ARDUINO_AVR_PROMICRO16)
